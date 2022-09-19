@@ -32,6 +32,11 @@
 *.app
 
 
+
 *.idea
 /cmake-build-debug
 CMakeLists.txt
+
+09월 02일 - 정렬/cmake-build-debug/CMakeFiles/clion-log.txt
+.DS_Store
+
