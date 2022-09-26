@@ -1,6 +1,6 @@
-#include "iostream"
-#include "vector"
-#include "algorithm"
+#include <iostream>
+#include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -43,7 +43,6 @@ int rotate(int s, char input){
 int main(){
 
     int n,k;
-    bool fail = false ; //성공 여부
     cin >> n >> k;
 
     wheel.assign(n,'?');
@@ -58,14 +57,13 @@ int main(){
         if(rotate(s, input)){
             // -1이 반환된 경우
             cout << "!";
-            fail = true;
-            break;
+            return 0;
         }
         
         
     }
 
-    if(!fail){ // 성공 했다면 바퀴 출력
+
         int i = cursor;
         do{
             cout << wheel[i];
@@ -74,7 +72,7 @@ int main(){
         }
         while(i != cursor);
 
-    }
+
     
     
     
