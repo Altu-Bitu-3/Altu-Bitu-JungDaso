@@ -35,11 +35,11 @@ string getOutput(string arr){
     else{ // 길이가 홀수면
 
         char temp = '\n';
-        for(int i=0; i< arr.length();i++){
+        for(int i=0; i< arr.length();i+=2){
             if(arr[i]==arr[i+1]){
                 sortedArr.push_back(arr[i]);
                 s.push(arr[i+1]);
-                i++;
+
             }
             else if(temp == '\n'){
                 temp = arr[i];

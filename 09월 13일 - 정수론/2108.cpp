@@ -17,8 +17,6 @@ int calMean(vector<int> v){
 
 int calMid(vector<int> v){
 
-    sort(v.begin(),v.end());
-
     return v[v.size()/2];
 }
 
@@ -57,7 +55,7 @@ int calMost(vector<int> v){
 
 int calScope(vector<int> v){
 
-    sort(v.begin(),v.end());
+
 
      return v[v.size()-1] - v[0];
 }
@@ -74,6 +72,8 @@ int main(){
         cin >> input;
         v.push_back(input);
     }
+
+    sort(v.begin(),v.end());
 
     cout << calMean(v) << "\n";
     cout << calMid(v) << " \n";

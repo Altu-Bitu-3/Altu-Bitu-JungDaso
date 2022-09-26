@@ -2,7 +2,7 @@
 
 using namespace std;
 
-long long gcd(int x, int y){
+int gcd(int x, int y){
 
     if(y==0){
         return x;
@@ -18,7 +18,7 @@ int main(){
 
     cin >> x >> y;
 
-    long long output = x + y - gcd(x,y);
+    int output = x + y - gcd(x,y);
 
     cout << output;
 }

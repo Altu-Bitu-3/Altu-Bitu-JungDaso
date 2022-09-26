@@ -1,14 +1,38 @@
 #include "iostream"
 #include "vector"
+#include <cmath>
+#include "set"
 
 using namespace std;
+
+vector<bool> isPrime(int n){
+
+    vector<bool> is_prime(n+1, true);
+    is_prime[0] = is_prime[1] = false;
+
+    for(int i=2; i<=  sqrt(n) ; i++){
+
+        if(is_prime[i]){
+
+            for (int j = i*i; j <= n; j+=i) {
+                is_prime[j] = false;
+            }
+        }
+
+    }
+
+    return is_prime;
+
+}
+
+
 
 int getSum(int n){
     int temp = n;
     int sum = 0; //각 자리의 제곱합
 
     do{
-        sum += (temp%10)^2;
+        sum += pow(temp%10,2);
         temp = temp/10;
     }
     while(temp != 0);
@@ -19,7 +43,7 @@ int getSum(int n){
 bool isHappy(int n){
 
     int temp = n;
-    int first = getSum(n); // 첫번째 제곱합이 반복되면 상근수가 아니다.
+    set<int> s; // 첫번째 제곱합이 반복되면 상근수가 아니다.
     while(true){
 
         temp = getSum(temp);
@@ -28,38 +52,24 @@ bool isHappy(int n){
             return  true;
         }
 
-        if (temp == first){
+        if (s.find(temp) != s.end()){
             return false;
         }
+
+        s.insert(temp);
 
     }
 
 }
 
 vector<int> findHappyPrime(int n ){
-    vector<bool> is_prime(n+1, true);
+    vector<bool> is_prime = isPrime(n);
     vector<int> outputs;
 
-    is_prime[0] = is_prime[1] = false;
-    int cnt =0;
-    for (int i = 2; i <= n; ++i) {
-        if(is_prime[i]){
-
-            for (int j = i; j <=n ; j+=i) { //배수를 소수에서 지움.
-
-                if(is_prime[j]){
-                    is_prime[j] = false;
-                    cnt++;
-
-                }
-            }
-
-            if(isHappy(i)){
-                outputs.push_back(i);
-            }//상근수이면  벡터에 저장.
-
+    for(int i=2;i<n;i++){
+        if(is_prime[i]&&isHappy(i)){
+            outputs.push_back(i);
         }
-
     }
 
     return outputs;
@@ -74,7 +84,7 @@ int main(){
 
     vector<int> outputs = findHappyPrime(n);
 
-    for(auto iter = outputs.begin() ;iter!=outputs.end();){
+    for(auto iter = outputs.begin() ;iter!=outputs.end();iter++){
 
         cout << *iter << "\n";
     }
