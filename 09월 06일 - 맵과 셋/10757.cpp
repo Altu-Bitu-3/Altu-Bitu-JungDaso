@@ -3,55 +3,53 @@
 #include "vector"
 
 using namespace std;
-typedef map<int,int> ci;
 
-void add(ci& m1, ci& m2,vector<int>& sum,int n){
+vector<int> add(string& a, string& b){
     int tmp = 0;
+    int a_index = a.size()-1;
+    int b_index = b.size()-1;
 
-    for (int i = 0; i < n + 1; i++) {
+    vector<int> sum;
 
-        int rem = (m1[i] + m2[i] + tmp) % 10;//일의 자리 수 계산
-        tmp = (m1[i] + m2[i] + tmp) / 10; //올림
+    while(a_index>=0 && b_index>=0){
 
-        if (i == n && rem == 0)
-            break;
+        int num = (a[a_index--]-'0') +( b[b_index--]-'0') +tmp; //더한 값
+        int rem = num % 10;
+        tmp = num / 10; //올림
 
-        sum.insert(sum.begin(), rem); // 작은 자리 부터 계산하므로 벡터의 앞에 계산 값을 넣어줌
+        sum.insert(sum.begin(),rem);
     }
 
+    while (a_index >= 0) {
+        int num = a[a_index--] - '0';
+
+        num += tmp;
+        tmp = num / 10;
+        sum.insert(sum.begin(),num % 10);
+    }
+
+    // 남은 올림 확인
+    if (tmp)
+        sum.insert(sum.begin(),1);
+
+    return sum;
 }
 
 int main() {
+
     string A, B;
 
-
-    map<int, int> m1, m2;
     vector<int> sum;
 
     cin >> A >> B;
 
     if (A.length() < B.length()) { // 큰 자리를 가진 숫자가 A에 오게 만듦.
-        string tmp = A;
-        A = B;
-        B = tmp;
+        swap(A,B);
     }
 
-    for (int i = 0; i < A.length(); i++) { // 낮은 자리수 부터 저장.
-        int index = A.length() - i - 1;
-        m1[i] = A[index] - '0';
+    sum = add(A,B);
 
-
-    }
-    for (int i = 0; i < B.length(); i++) {
-        int index = B.length() - i - 1;
-        m2[i] = B[index] - '0';
-
-    }
-
-    int n = A.length(); // 큰 수의 최대 자릿 수
-    add(m1,m2,sum,n);
-
-
+    // 출력
     for (auto &iter: sum) {
         cout << iter;
     }
