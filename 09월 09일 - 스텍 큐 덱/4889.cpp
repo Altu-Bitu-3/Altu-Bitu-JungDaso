@@ -1,9 +1,4 @@
-//
-// Created by dasoya on 2022/09/13.
-//
-//
-// Created by dasoya on 2022/09/13.
-//
+
 #include "iostream"
 #include "stack"
 #include "vector"
@@ -53,15 +48,12 @@ int main(){
 
     while(getline(cin,s)){
 
-        if(s.find('-') != string::npos){ // -가 있는 경우에만 종료
-
+        if(s[0] == '-'){ // -가 있는 경우에만 종료
 
             break; // 마지막 문장 받으면 종료
         }
 
-        cout << i <<". " << getOutput(s) <<'\n';
-
-        i++;
+        cout << i++ <<". " << getOutput(s) <<'\n';
 
     }
 
