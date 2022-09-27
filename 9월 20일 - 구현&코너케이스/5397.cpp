@@ -15,11 +15,8 @@ string getPassword(string input){
 
         if(input[i] == '<'){
 
-            if(st.empty()){
+            if(!st.empty()){
 
-                continue;
-            }
-            else{
                 temp.push(st.top());
                 st.pop();
             }
@@ -29,9 +26,8 @@ string getPassword(string input){
 
         if(input[i] == '>'){
 
-            if(temp.empty()){
-                continue;
-            }else{
+            if(!temp.empty()){
+
                 st.push(temp.top());
                 temp.pop();
             }
