@@ -17,11 +17,13 @@ int dfs(int m, int n , stack<ci> stk, vector<vector<bool>> matrix){
         auto [r,c] = stk.top();
         stk.pop();
 
+        //배추가 있는지 검사할 때 처음 방문 했다면 필요한 지렁이 수를 늘림
         if(matrix[r][c]){
             ans++;
             matrix[r][c] = false;
         }
 
+        // 인접한 배추를 검사함
         for (int i = 0; i < 4; ++i) {
 
             int new_r = r+dr[i];
@@ -31,6 +33,7 @@ int dfs(int m, int n , stack<ci> stk, vector<vector<bool>> matrix){
                 matrix[new_r][new_c]){
 
                 stk.push({new_r,new_c});
+                //이후 방문한 곳은 다시 방문 하지 않도록 저장.
                 matrix[new_r][new_c] = false;
             }
 
@@ -55,14 +58,12 @@ int main(){
         vector<vector<bool>> matrix(n,vector<bool>(m,false));
         stack<ci> stk;
 
-        //cnt = k;
-
         while(k--){
 
             cin >> b >> a;
 
             matrix[a][b]= true;
-            stk.push({a,b});
+            stk.push({a,b}); //배추가 있는 곳을 미리 스택에 넣어둠
         }
 
         cout << dfs(m,n,stk,matrix) << "\n";
